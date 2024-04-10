@@ -14,6 +14,10 @@ I've decided to use Traefik because it is very easy to configure through a docke
 
 If you are interested to host production-ready websites, I recommend you to use another web server like [Nginx](https://www.nginx.com/) since Traefik is not really good for scaling.
 
+## Uptime (uptime-kuma)
+
+I use [uptime-kuma](https://github.com/louislam/uptime-kuma) to monitor the uptime of my websites. Uptime-kuma is a fancy self-hosted monitoring tool that allows you to monitor the uptime of your websites and services. It is very easy to install and configure and provides a nice dashboard to see the uptime of your websites.
+
 ## Conclusion
 
 The HTTP is a very important protocol for the internet. It allows the transfer of hypertext between a client and a server. I have configured a web server in my home network to serve my websites. I use Traefik as my web server because it is very easy to configure and supports Let's Encrypt out of the box. This way, I can have HTTPS on all my websites without any effort.
