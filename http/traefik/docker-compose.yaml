@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  traefik:
+    image: traefik:v2.11
+    container_name: traefik
+    restart: always
+    command:
+      - --api.dashboard=true
+      - --api.insecure=true
+      - --providers.docker=true
+      - --providers.docker.exposedByDefault=false
+      - --providers.docker.network=traefik
+      - --providers.file.directory=/config
+      - --entrypoints.http.address=:80
+      - --entrypoints.https.address=:443
+      - --entrypoints.https.http.tls=true
+    networks:
+      - traefik
+    ports:
+      - 80:80
+      - 443:443
+      - 8080:8080
+    volumes:
+      - ./config:/config
+      - ../../scripts/certificate/server.cer:/certs/server.cer
+      - ../../scripts/certificate/server.key:/certs/server.key
+      - /var/run/docker.sock:/var/run/docker.sock
+
+networks:
+  traefik:
+    external: true
