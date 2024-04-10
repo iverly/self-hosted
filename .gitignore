@@ -79,3 +79,11 @@ TAGS
 ## docker compose files
 data
 .env
+
+## certificates and root ca
+server.cnf
+*.crt
+*.pem
+*.cer
+*.key
+*.csr
