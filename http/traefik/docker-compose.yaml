@@ -15,6 +15,7 @@ services:
       - --entrypoints.http.address=:80
       - --entrypoints.https.address=:443
       - --entrypoints.https.http.tls=true
+      - --serverstransport.insecureskipverify=true
     networks:
       - traefik
     ports:
