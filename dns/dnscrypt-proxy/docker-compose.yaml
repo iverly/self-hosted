@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  dnscrypt-proxy:
+    image: klutchell/dnscrypt-proxy
+    container_name: dnscrypt-proxy
+    restart: always
+    networks:
+      dns:
+        ipv4_address: 10.42.20.100
+    volumes:
+      - ./config/dnscrypt-proxy.toml:/config/dnscrypt-proxy.toml
+
+networks:
+  dns:
+    external: true
