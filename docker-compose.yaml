@@ -1,0 +1,33 @@
+version: "3.8"
+
+services:
+  hello-world:
+    image: hello-world
+    container_name: hello-world
+    networks:
+      - traefik
+      - dns
+      - vpn
+
+networks:
+  traefik:
+    name: traefik
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.42.10.0/24
+  dns:
+    name: dns
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.42.20.0/24
+  vpn:
+    name: vpn
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.42.30.0/24
