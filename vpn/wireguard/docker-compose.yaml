@@ -1,0 +1,34 @@
+version: "3.8"
+
+services:
+  wireguard:
+    image: lscr.io/linuxserver/wireguard
+    container_name: wireguard
+    restart: always
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    networks:
+      - vpn
+      - dns
+    environment:
+      - PUID=1001
+      - PGID=100
+      - TZ=Europe/Paris
+      - SERVERURL=auto
+      - SERVERPORT=51820
+      - PEERS=2 # change to match how many devies you want to use Wireguard on
+      - PEERDNS=10.42.20.1
+      - INTERNAL_SUBNET=10.13.13.0
+      - ALLOWEDIPS=0.0.0.0/0
+    ports:
+      - 51820:51820/udp
+    volumes:
+      - ./data:/config
+      - /lib/modules:/lib/modules
+
+networks:
+  vpn:
+    external: true
+  dns:
+    external: true
