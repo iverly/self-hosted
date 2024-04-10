@@ -15,6 +15,9 @@ services:
       - --entrypoints.http.address=:80
       - --entrypoints.https.address=:443
       - --entrypoints.https.http.tls=true
+      - --entrypoints.http-external.address=:980
+      - --entrypoints.https-external.address=:9443
+      - --entrypoints.https-external.http.tls=true
       - --serverstransport.insecureskipverify=true
     networks:
       - traefik
