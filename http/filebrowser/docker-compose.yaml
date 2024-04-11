@@ -12,8 +12,14 @@ services:
       - traefik.http.services.filebrowser.loadbalancer.server.port=80
     healthcheck:
       disable: true
+    networks:
+      - traefik
     volumes:
       - ./data/library:/srv
       # uncomment the following lines to persist the database and configuration after first run
       # - ./data/filebrowser.db:/./database.db
       # - ./data/.filebrowser.json:/./.filebrowser.json
+
+networks:
+  traefik:
+    external: true
