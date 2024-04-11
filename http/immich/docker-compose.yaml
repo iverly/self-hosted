@@ -11,6 +11,9 @@ services:
       - traefik.http.routers.immich.rule=Host(`${SERVER_ADDRESS}`)
       - traefik.http.routers.immich.entrypoints=https
       - traefik.http.services.immich.loadbalancer.server.port=3001
+    networks:
+      - default
+      - traefik
     volumes:
       - ./data/library:/usr/src/app/upload
       - /etc/localtime:/etc/localtime:ro
@@ -69,3 +72,7 @@ services:
 
 volumes:
   model-cache:
+
+networks:
+  traefik:
+    external: true
