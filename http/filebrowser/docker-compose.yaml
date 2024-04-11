@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  filebrowser:
+    image: filebrowser/filebrowser
+    container_name: filebrowser
+    restart: unless-stopped
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.filebrowser.rule=Host(`${SERVER_ADDRESS}`)
+      - traefik.http.routers.filebrowser.entrypoints=https
+      - traefik.http.services.filebrowser.loadbalancer.server.port=80
+    healthcheck:
+      disable: true
+    volumes:
+      - ./data/library:/srv
+      # uncomment the following lines to persist the database and configuration after first run
+      # - ./data/filebrowser.db:/./database.db
+      # - ./data/.filebrowser.json:/./.filebrowser.json
