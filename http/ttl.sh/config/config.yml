@@ -1,0 +1,25 @@
+version: 0.1
+
+log:
+  level: info
+
+storage:
+  delete:
+    enabled: true
+  filesystem:
+    rootdirectory: /var/lib/registry
+
+http:
+  addr: 0.0.0.0:5000
+  headers:
+    X-Content-Type-Options: [nosniff]
+
+notifications:
+  endpoints:
+    - name: ttl-hooks
+      url: http://ttl-hooks:8000/v1/hook/registry-event
+      headers:
+        Authorization: ["Token dev-hook-token"]
+      timeout: 200ms
+      threshold: 3
+      backoff: 5s

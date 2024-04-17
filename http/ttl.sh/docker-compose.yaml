@@ -1,0 +1,47 @@
+version: "3.8"
+
+services:
+  ttl-registry:
+    image: registry:2
+    container_name: ttl-registry
+    restart: unless-stopped
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.ttl-registry.rule=Host(`${SERVER_ADDRESS}`)
+      - traefik.http.routers.ttl-registry.entrypoints=https
+      - traefik.http.services.ttl-registry.loadbalancer.server.port=5000
+    networks:
+      - default
+      - traefik
+    volumes:
+      - ./data/registry:/var/lib/registry
+      - ./config/config.yml:/etc/docker/registry/config.yml
+      - ./scripts/entrypoint.sh:/entrypoint.sh
+      - ./scripts/garbage-collect.sh:/garbage-collect.sh
+
+  ttl-hooks:
+    image: ttl-hooks
+    container_name: ttl-hooks
+    restart: unless-stopped
+    environment:
+      REDISCLOUD_URL: "redis://ttl-redis:6379"
+      HOOK_TOKEN: "dev-hook-token"
+
+  ttl-reaper:
+    image: ttl-reaper
+    container_name: ttl-reaper
+    restart: unless-stopped
+    environment:
+      REGISTRY_URL: "http://ttl-registry:5000"
+      REDISCLOUD_URL: "redis://ttl-redis:6379"
+
+  ttl-redis:
+    image: redis:latest
+    container_name: ttl-redis
+    restart: unless-stopped
+    volumes:
+      - ./data/redis:/data
+
+networks:
+  traefik:
+    external: true
