@@ -26,6 +26,14 @@ I use [immich](https://immich.app) to share my photos with my family and friends
 
 I use [filebrowser](https://filebrowser.org) to store and share my files with my family and friends. Filebrowser is a self-hosted web application that allows you to manage your files with a nice interface. It provides a file manager, a file uploader, a file editor and a file viewer.
 
+## Temporary docker registry (ttl.sh)
+
+I use [ttl.sh](https://ttl.sh) to store my docker images temporarily. Ttl.sh is a self-hosted web application that allows you to store your docker images temporarily.
+
+In order to run it, you have to build the ttl.sh images in your local machine (because they don't ship it).
+
+The instructions are on the [GitHub repository](https://github.com/replicatedhq/ttl.sh).
+
 ## Conclusion
 
 The HTTP is a very important protocol for the internet. It allows the transfer of hypertext between a client and a server. I have configured a web server in my home network to serve my websites. I use Traefik as my web server because it is very easy to configure and supports Let's Encrypt out of the box. This way, I can have HTTPS on all my websites without any effort.
